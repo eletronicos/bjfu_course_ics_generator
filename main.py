@@ -165,27 +165,34 @@ def basic_setting():
     global class_info_list, ics_stu_code, ics_alarm_uid, ics_unit_uid
     print("欢迎使用课程表生成工具。")
     # 获取学号
-    stu_code = input("请输入北京林业大学学号(如：171001101): ")
-    password = getpass.getpass("请输入教务系统密码: ")
-    ics_stu_code = stu_code
-    class_info_list = get_course_list(stu_code, password)
+    try:
+        stu_code = input("请输入北京林业大学学号(如：171001101): ")
+        password = getpass.getpass("请输入教务系统密码: ")
+        ics_stu_code = stu_code
+        class_info_list = get_course_list(stu_code, password)
 
-    # 获取第一周日期
-    first_week_date = input("请设置第一周的星期一日期(如：20190902): ")
-    check_input(InputCheckMethod.first_day, first_week_date)
-    # 获取提醒设置
-    reminder = input("正在配置提醒功能\n"
-                     "【0】不提醒\n"
-                     "【1】上课前 10 分钟提醒\n"
-                     "【2】上课前 30 分钟提醒\n"
-                     "【3】上课前 1 小时提醒\n"
-                     "【4】上课前 2 小时提醒\n"
-                     "【5】上课前 1 天提醒\n"
-                     "请输入数字选择提醒时间: ")
-    check_input(InputCheckMethod.reminder, reminder)
-    # 生成随机id
-    ics_alarm_uid = random_str(30)
-    ics_unit_uid = random_str(20)
+        # 获取第一周日期
+        first_week_date = input("请设置第一周的星期一日期(如：20190902): ")
+        check_input(InputCheckMethod.first_day, first_week_date)
+        # 获取提醒设置
+        reminder = input("正在配置提醒功能\n"
+                        "【0】不提醒\n"
+                        "【1】上课前 10 分钟提醒\n"
+                        "【2】上课前 30 分钟提醒\n"
+                        "【3】上课前 1 小时提醒\n"
+                        "【4】上课前 2 小时提醒\n"
+                        "【5】上课前 1 天提醒\n"
+                        "请输入数字选择提醒时间: ")
+        check_input(InputCheckMethod.reminder, reminder)
+        # 生成随机id
+        ics_alarm_uid = random_str(30)
+        ics_unit_uid = random_str(20)
+
+    except:
+        print("用户名或密码错误")
+        basic_setting()
+
+
 
 
 def check_input(check_method, str_input):
